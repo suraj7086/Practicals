@@ -1,0 +1,110 @@
+/* Write a menu driven program that implements following on a linear array:
+a) Insert a new element
+b) Delete an element from a given position
+c) To find the location of a given  element
+d) To a display the elements of a linear array
+
+ */
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+class Modification{
+  public:
+      int pos,element;
+      int flag =1;
+
+
+  void Input(int size){
+  cout<<"Enter the position and element "<<endl;
+  cin>> pos >> element;
+  }
+  void Insert(int size ,int arr[]){
+  for(int i=size-1;i>=pos-1;i--){
+        arr[i+1] = arr[i];
+
+    }
+    arr[pos - 1] = element;
+    cout<< "New Elements are : "<<endl;
+    display(size,arr);
+  }
+  void Deletion(int size ,int arr[]){
+    cout<<"Enter the position to delete the element "<<endl;
+    cin>>pos;
+     for(int i=0;i<size;i++){
+        cout<<arr[i]<<"\t";
+     }
+     cout<<endl;
+    for(int i=pos;i<size;i++){
+
+        arr[i-1] = arr[i];
+
+    }
+    size = size -1;
+    cout<<endl;
+    cout<<"New array is : "<<endl;
+    display(size,arr);
+  }
+  void Search(int size ,int arr[]){
+  cout<<"Enter the element to search the element "<<endl;
+  cin>>element;
+  for(int i=0;i<size;i++){
+    if(element == arr[i]){
+        cout<<"Element is found at  position : "<< i +1<<endl;
+        flag=0;
+        break;
+    }
+  }
+  if(flag == 1){
+    cout<<"Element is not found "<<endl;
+  }
+}
+  void display(int size,int arr[])
+  {
+
+      for(int i=0;i<size;i++){
+        cout<< arr[i]<< "\t";
+      }
+  }
+
+};
+int main(){
+Modification mod;
+int size;
+cout<<"enter the size of the element "<<endl;
+cin>>size;
+int arr[size];
+   cout<<"Enter the elements of the array "<<endl;
+   for(int i=0;i<size;i++){
+    cin>>arr[i];
+   }
+
+cout<<"This the menu driven program "<<endl;
+cout<<"Enter the choice "<<endl;
+int ch;
+while(ch!= 5)
+   {
+    cout<<" 1 for Insertion \t 2 for Deletion \t 3 for Searching \t 4 to display array "<<endl;
+
+    cin>>ch;
+    switch(ch){
+        case 1:
+            mod.Input(size);
+            mod.Insert(size,arr);
+            break;
+
+        case 2:
+            mod.Deletion(size,arr);
+            break;
+
+        case 3:
+            mod.Search(size,arr);
+            break;
+        default:
+            mod.display(size,arr);
+
+            }
+        cout<<endl;
+    }
+
+}
